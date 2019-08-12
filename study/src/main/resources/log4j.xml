@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.zeorck.contorller">
+	<logger name="com.test.app">
 		<level value="info" />
 	</logger>
 	
