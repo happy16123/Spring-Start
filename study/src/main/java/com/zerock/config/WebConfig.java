@@ -1,4 +1,4 @@
-package com.zeorck.config;
+package com.zerock.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
