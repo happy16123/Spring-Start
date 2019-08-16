@@ -58,3 +58,11 @@
   - 라이브러리 추가 후
     1. 로그설정 파일을 추가하는 작업
     2. JDBC연결 정보를 수정
+
+## 5. MVC의 기본 구조
+  - 프로젝트 구조
+    - Spring MVC => servlet-context.xml, ServletConfig.class
+    - Spring Core, MyBaits => root-context.xml, RootConfig.class
+  - WebConfig : AbstractAnnotationConfigDispatcherServletInitalizer 상속
+  - ServletConfig : @EnableWebMvc 어노테이션과 WebMvcConfigurer 인터페이스를 구현
+    - WebMvcConfigurerAdapter 추상클래스는 5.0버전부터 Deprecated 되었음
