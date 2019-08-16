@@ -66,3 +66,20 @@
   - WebConfig : AbstractAnnotationConfigDispatcherServletInitalizer 상속
   - ServletConfig : @EnableWebMvc 어노테이션과 WebMvcConfigurer 인터페이스를 구현
     - WebMvcConfigurerAdapter 추상클래스는 5.0버전부터 Deprecated 되었음
+
+### 5.1 Controller
+  - HttpServletRequest, HttpServletResponse를 거의 사용할 필요 없이 필요한 기능 구현
+  - 다양한 타입의 파라미터 처리, 다양한 타입의 리턴 타입 사용 가능
+  - 전송 방식에 대한 처리를 어노테이션으로 처리 가능
+  - 상속, 인터페이스 대신 어노테이션만으로도 필요한 설정 가능
+  - @RequestMapping의 변화
+    - 4.3버전부터는 @GetMapping, @PostMapping 축약형의 표현이 등장
+    - GET, POST 뿐만아니라 PUT, DELETE 등 방식이 많이 사용됨(Restful)
+  - 파라미터 수집
+    - request.getParameter() 이용의 불폄함을 없애줌
+    - @RequestParam 어노테이션으로 전달되는 파라미터를 받을 수 있음
+    - 객체, 리스트, 배열 등 여러타입으로 받을수 있음
+    - @InitBinder
+      - 파라미터의 수집을 다른 용어로 'binding(바인딩)' 이라고 함
+      - 변환이 가능한 데이터는 자동으로 되지만 파라미터를 변환해서 처리해야 하는 경우 @InitBinder를 사용
+      
