@@ -82,4 +82,18 @@
     - @InitBinder
       - 파라미터의 수집을 다른 용어로 'binding(바인딩)' 이라고 함
       - 변환이 가능한 데이터는 자동으로 되지만 파라미터를 변환해서 처리해야 하는 경우 @InitBinder를 사용
-      
+
+### 5.2 Model
+  - jsp(view)에 controller에서 생성되니 데이터를 담아서 전달하는 역할
+  - Servlet : request.setAttribute()와 유사한 역할
+  - Spring : model.addtribute()
+  - @ModelAttribute
+    - controller는 기본적으로 java bean 규칙에 맞는 개체는 다시 화면으로 객체를 전달함
+      - 전달될 때에는 클래스명의 앞글자는 소문자로 처리
+      - 기본 자료형일 경우는 파라미터로 선언하더라도 기본적으로 화면까지는 전달되지 않음
+    - 강제로 전달받은 파라미터를 Model에 담아서 전달하도록 할 때 필요한 어노테이션
+    - 타입에 관계없이 무조건 model에 담아서 전달되므로, 파라미터는 전달된 데이터를 다시 화면에서 사용해야 할 경우 유용하게 사용
+  - RedirectAttributes
+    - 일회셩으로 데이터를 전달하는 용도로 사용
+    - Servlet : response.sendRedirect()와 동일한 용도
+    - Spring : rttr.addFlashAttribute(); return "redirect:/";
