@@ -43,6 +43,13 @@
 			<version>1.18.0</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- https://mvcrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.4</version>
+		</dependency>
 				
 		<!-- AspectJ -->
 		<dependency>
