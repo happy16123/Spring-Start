@@ -82,6 +82,28 @@
     - @InitBinder
       - 파라미터의 수집을 다른 용어로 'binding(바인딩)' 이라고 함
       - 변환이 가능한 데이터는 자동으로 되지만 파라미터를 변환해서 처리해야 하는 경우 @InitBinder를 사용
+  - Return Type
+    - String : jsp를 이용하는 경우에는 jsp 파일의 경로와 파일이름을 나타내기 위해 사용
+    - void : 호출하는 URL과 동일한 이름의 jsp를 의미(메소드 이름)
+    - VO, DTO : Json 타입의 데이터를 만들어서 반환하는 용도
+    - ResponseEntity : response 할 때 Http 헤더 정보와 내용을 가공하는 용도
+    - Model, ModelAndView : Model로 데이터를 반환하거나 화면까지 같이 지정하는 경우(최근에는 많이 사용하지 않음)
+    - HttpHeaders : 응답에 내용 없이 Http 헤더 메시지만 전달하는 용도
+  - 파일 업로드 처리
+    - 전달되는 파일 데이터를 분석해야 하는데, Servlet 3.0 전까지는 commons의 파일 업로드를 이용하거나 cos.jar 등을 이용해 처리
+    - Servlet 3.0 이후(Tomcat7.0)에는 기본적으로 업로드되는 파일을 처리할 수 있는 기능이 추가되어 있으므로 라이브러리가 필요하지 않음
+  - Exception
+    - @ExceptionHandler와 @ControllerAdvice를 이용한 처리
+      - @ControllerAdvice는 AOP(Aspect-Oriented-Programming)를 이용하는 방식
+      - AOP 방식을 이용하면 공통적인 예외사항에 대해 별도로 분리하는 방식
+      - @ControllerAdvice : 해당 객체가 스프링의 컨트롤러에서 발생하는 예외를 처리하는 존재임을 명시하는 용도
+      - @ExceptionHanlder : 해당 메서드가 들어가는 예외 타입을 처리한다는 것을 의미
+        - 속성으로는 Exception 클래스 타입을 지정할 수 있음 ex) Exception.class
+      - ServletConfig에서 인식해야 하므로 패키지를 추가해야함
+    - @ResponseEntity를 이용하는 예외 메시지 구성
+      - 404 에러 메시지는 적절하게 처리하는 것이 좋음
+      - @ResponseStatus()를 사용해 not found일 때 적절한 페이지를 보여줌
+      - Servlet 3.0 이상을 이용해야하며 WebConfig에 ServletRegistration.Dynamic 파라미터를 갖는 메소드를 작성해야함
 
 ### 5.2 Model
   - jsp(view)에 controller에서 생성되니 데이터를 담아서 전달하는 역할
