@@ -1,4 +1,5 @@
 # 정리
+코드로 배우는 스프링 웹 프로젝트[^1]
 
 ## 1. 환경설정 및 파일수정
   - java 1.8, springframework 5.0.7, tomcat 9, Lombok, junit 4.12
@@ -66,6 +67,26 @@
   - WebConfig : AbstractAnnotationConfigDispatcherServletInitalizer 상속
   - ServletConfig : @EnableWebMvc 어노테이션과 WebMvcConfigurer 인터페이스를 구현
     - WebMvcConfigurerAdapter 추상클래스는 5.0버전부터 Deprecated 되었음
+  - 일반적은 웹 프로젝트는 3-tier 방식을 구성
+    - Presentation(화면 계층)
+      - 화면에 보여주는 기술을 사용하는 영역
+      - Servlet/jsp나 스프링 MVC가 담당하는 영역
+    - Business(비즈니스 계층)
+      - 순수한 비즈니스 로직을 담고 있는 영역
+      - 고객이 원하는 요구 사항을 반영하는 계층이기 때문에 중요함
+      - 설계는 고객의 요구 사항과 정확히 일치해야함
+      - 'xxxService'와 같은 이름으로 구성, 메소드 이름 역시 고객들이 사용하는 용어 그대로 사용하는 것이 좋음
+    - Persistence(영속 계층 or 데이터 계층)
+      - 데이터를 어떤 방식으로 보관하고 사용하는가에 대한 설계가 들어가있는 계층
+      - 일반적으로 데이터베이스를 많이 사용하지만 경우에 따라 네트워크 호출, 원격 호출 등 기술이 접목될 수 있음
+    - 각 영역별 Naming Convention(명명 규칙)
+      - xxxController : 스프링 MVC에서 동작하는 Controller 클래스르 설계할 때 사용
+      - xxxService, xxxServiceImpl : 비즈니스 영역을 담당하는 인터페이스와 구현한 클래스
+      - xxxDAO, xxxRepository : DAO(Data Access Object)나 Repository라는 이름으로 영역을 따로 구성하는것이 보편적
+      - VO, DTO
+        - 일반적으로 유사한 의미로 데이터를 담고 있는 객체를 의미하는 공통점이 있음
+        - VO : 주로 Read Only의 목적이 강하고 데이터도 Immutable(불변)하게 설계하는 것이 정석
+        - DTO : 데이터 수집의 용도가 강함
 
 ### 5.1 Controller
   - HttpServletRequest, HttpServletResponse를 거의 사용할 필요 없이 필요한 기능 구현
