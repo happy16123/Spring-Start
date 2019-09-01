@@ -15,14 +15,11 @@ import lombok.extern.java.Log;
 @Service
 @AllArgsConstructor
 public class BoardServiceImpl implements BoardService {
-
-//	@Setter(onMethod_ = @Autowired)
-	private BoardMapper mapper;
 	
+	private BoardMapper mapper;
 	@Override
 	public void register(BoardVO board) {
 		// TODO Auto-generated method stub
-		log.info("register........" + board);
 		mapper.insertSelectKey(board);
 	}
 
@@ -53,5 +50,4 @@ public class BoardServiceImpl implements BoardService {
 		log.info("getList.....");
 		return mapper.getList();
 	}
-	
 }

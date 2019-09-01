@@ -27,7 +27,7 @@ public class BoardMapperTests {
 	@Test
 	public void testInsert() {
 		BoardVO board = new BoardVO();
-		board.setTitle("test title");
+		board.setTitle("test 한글");
 		board.setContent("test content");
 		board.setWriter("test writer");
 		
