@@ -3,6 +3,7 @@
 
 ## 1. 환경설정 및 파일수정
   - java 1.8, springframework 5.0.7, tomcat 9, Lombok, junit 4.12
+  - bootstrap 오픈소스 사용(SB Admin 2)
   - maven-war-plugin 추가
   - xml을 사용하지 않기 때문에 AbstractAnnotationConfigDispatcherServletInitializer 상속받는 클래스 생성
 
