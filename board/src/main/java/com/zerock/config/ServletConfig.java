@@ -27,4 +27,5 @@ public class ServletConfig implements WebMvcConfigurer {
 		// TODO Auto-generated method stub
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
+
 }

@@ -15,9 +15,9 @@
 
 	<div class="row">
 		<div class="col-lg-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">Board Register</div>
-				<div class="panel-body">
+			<div class="card">
+				<div class="card-header">Board Register</div>
+				<div class="card-body">
 					<form role="form" action="/board/register" method="post">
 						<div class="form-group">
 							<label>Title</label> <input class="form-control" name='title'>
@@ -29,8 +29,8 @@
 						<div class="form-group">
 							<label>Writer</label> <input class="form-control" name='writer'>
 						</div>
-						<button type="submit" class="btn btn-default">Submit</button>
-						<button type="reset" class="btn btn-default">Reset</button>
+						<button type="submit" class="btn btn-success">Submit</button>
+						<button type="reset" class="btn btn-warning">Reset</button>
 					</form>
 				</div>
 			</div>
