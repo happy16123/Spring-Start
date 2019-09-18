@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.zerock.domain.BoardVO;
 import com.zerock.domain.Criteria;
+import com.zerock.domain.PageDTO;
 import com.zerock.service.BoardService;
 
 import lombok.AllArgsConstructor;
@@ -33,6 +34,7 @@ public class BoardController {
 	public void list(Criteria cri, Model model) {
 		log.info("list : " + cri);
 		model.addAttribute("list", service.getList(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri, 22));
 	}
 	
 	@PostMapping("/register")
