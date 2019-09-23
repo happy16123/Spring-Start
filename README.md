@@ -66,6 +66,9 @@
     - Spring MVC => servlet-context.xml, ServletConfig.class
     - Spring Core, MyBaits => root-context.xml, RootConfig.class
   - WebConfig : AbstractAnnotationConfigDispatcherServletInitalizer 상속
+    - getrServletFilters 메소드 구현으로 한글 깨짐 설정(POST방식)
+    - GET방식은 URL에 직접 데이터를 추가하여 전송하는 방식이기에 서블릿 영역 밖에 존재
+      - 톰캣 server.xml에서 URIEncoding 설정
   - ServletConfig : @EnableWebMvc 어노테이션과 WebMvcConfigurer 인터페이스를 구현
     - WebMvcConfigurerAdapter 추상클래스는 5.0버전부터 Deprecated 되었음
   - 일반적은 웹 프로젝트는 3-tier 방식을 구성
