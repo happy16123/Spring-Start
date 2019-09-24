@@ -156,3 +156,15 @@
     - prefixOverrides 처리 후 엘리먼트 내용 중 가장 앞에 해당 문자들이 있다면 자동으로 지워준다.
     - suffix 처리 후 엘리먼트 내에 내용이 있으면 가장 뒤에 붙여준다.
     - suffixOverrides 처리 후 엘리먼트 내용 중 가장 뒤에 해당 문자들이 있다면 자동으로 지워준다.
+
+## REST(Representational State Transfer)
+1. Annotation
+  - @RestController : Controller가 REST 방식을 처리하기 위한 것임을 명시
+  - @RespnseBody : 일반적인 jsp와 같은 뷰로 전달되는 게 아니라 데이터 자체를 전달하기 위한 용도
+  - @PathVariable : URL 경로에 있는 값을 파라미터로 추출하려고 할 때 사용
+  - @CroossOrigin : Ajax의 크로스 도메인 문제를 해결
+  - @RequestBody : JSON데이터를 원하는 타입으로 바인딩 처리
+
+2. ResponseEntity
+  - REST 방식은 화면이 아니라 데이터를 전송하는 방식이기 때문에 요청한 쪽에서는 정상적인 데이터인지 구분할 수 있는 방법을 제공해야함
+  - 데이터와 HTTP 헤더의 상태 메세지 등을 같이 전달하는 용도로 사용
