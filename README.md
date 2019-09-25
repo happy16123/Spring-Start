@@ -161,7 +161,9 @@
 1. Annotation
   - @RestController : Controller가 REST 방식을 처리하기 위한 것임을 명시
   - @RespnseBody : 일반적인 jsp와 같은 뷰로 전달되는 게 아니라 데이터 자체를 전달하기 위한 용도
-  - @PathVariable : URL 경로에 있는 값을 파라미터로 추출하려고 할 때 사용
+  - @PathVariable
+    - URL 경로에 있는 값을 파라미터로 추출하려고 할 때 사용
+    - URL에서 '{}'로 처리된 부분은 컨트롤러의 메소드에서 변수로 처리가 가능
   - @CroossOrigin : Ajax의 크로스 도메인 문제를 해결
   - @RequestBody : JSON데이터를 원하는 타입으로 바인딩 처리
 
