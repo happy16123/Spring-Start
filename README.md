@@ -157,6 +157,10 @@
     - suffix 처리 후 엘리먼트 내에 내용이 있으면 가장 뒤에 붙여준다.
     - suffixOverrides 처리 후 엘리먼트 내용 중 가장 뒤에 해당 문자들이 있다면 자동으로 지워준다.
 
+3. @Param
+  - 원하는 명으로 mapper에서 사용할 수 있음
+  - 어노테이션을 쓰지 않아도 mapper에서 #{param1}이라던지, #{parameter}로 파라미터 명을 적으면 사용이 가능
+
 ## REST(Representational State Transfer)
 1. Annotation
   - @RestController : Controller가 REST 방식을 처리하기 위한 것임을 명시
