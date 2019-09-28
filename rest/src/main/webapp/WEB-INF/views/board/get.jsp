@@ -49,21 +49,44 @@
 		<div class="col-lg-12">
 			<div class="card">
 				<div class="card-header">
-					<i class="fa fa-comments fa-fw"></i>Reply
+					<i class="fa fa-comments fa-fw"></i> Reply
+					<button id="addReplyBtn" class="btn btn-primary btn-xs float-right">New Reply</button>
 				</div>
 
 				<div class="card-body">
 					<ul class="chat">
-						<li class="left clearfix" data-rno="12">
-							<div>
-								<div class="header">
-									<strong class="primary-font">user00</strong>
-									<small class="pull-right text-muted">2019-01-01 12:12</small>
-								</div>
-								<p>Good job!</p>
-							</div>
-						</li>
 					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLable">Reply Modal</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label>Reply</label>
+						<input class="form-control" name="reply" value="new Reply">
+					</div>
+					<div class="form-group">
+						<label>Replyer</label>
+						<input class="form-control" name="replyer" value="replyer">
+					</div>
+					<div class="form-group">
+						<label>Reply Date</label>
+						<input class="form-control" name="replyDate" value=''>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="modalModBtn" class="btn btn-warning">Modify</button>
+					<button type="button" id="modalRemoveBtn" class="btn btn-danger">Remove</button>
+					<button type="button" id="modalRegisterBtn" class="btn btn-primary">Register</button>
+					<button type="button" id="modalCloseBtn" class="btn btn-info">Close</button>
 				</div>
 			</div>
 		</div>
@@ -93,15 +116,45 @@
 				}
 				for(let i=0; i<list.length; i++){
 					str += "<li class='left clearfix' data-rno='" + list[i].rno + "'>";
-					str += "<div><div class='header'><strong class='primary-font'" + list[i].replyer + "</strong>";
-					str += "<small class='pull-right text-muted'>" + replyService().displayTime(list[i].replyDate) + "</small></div>";
+					str += "<div><div class='header'><strong class='primary-font'>" + list[i].replyer + "</strong>";
+					str += "<small class='float-right text-muted'>" + replyService().displayTime(list[i].replyDate) + "</small></div>";
 					str += "<p>" + list[i].reply + "</p></div></li>";
 				}
 				replyUL.html(str);
 			});
 		}
+		
+		const modal = $("#myModal");
+		const modalInputReply = modal.find("input[name='reply']");
+		const modalInputReplyer = modal.find("input[name='replyer']");
+		const modalInputReplyDate = modal.find("input[name='replyDate']");
+		const modalModBtn = $("#modalModBtn");
+		const modalRemoveBtn = $("#modalRemoveBtn");
+		const modalRegisterBtn = $("#modalRegisterBtn");
+		
+		$("#addReplyBtn").on("click", function(e){
+			modal.find("input").val("");
+			modalInputReplyDate.closest("div").hide();
+			modal.find("button[id != 'modalCloseBtn']").hide();
+			modalRegisterBtn.show();
+			modal.modal("show");
+		});
+		
+		modalRegisterBtn.on("click", function(e){
+			const reply = {
+					reply : modalInputReply.val(),
+					replyer : modalInputReplyer.val(),
+					bno : bnoValue
+				};
+			replyService().add(reply, function(result){
+				alert(result);
+				modal.find("input").val("");
+				modal.modal("hide");
+				showList(1);
+			});
+		});
 	});
-
+	
 	// console.log("=============");
 	// console.log("JS TEST");
 
