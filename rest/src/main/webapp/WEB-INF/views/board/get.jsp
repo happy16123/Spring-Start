@@ -108,7 +108,7 @@
 		showList(1);
 
 		function showList(page){
-			replyService().getList({bno : bnoValue, page : page || 1}, function(list){
+			replyService.getList({bno : bnoValue, page : page || 1}, function(list){
 				let str="";
 				if(list == null || list.length == 0){
 					replyUL.html("");
@@ -117,7 +117,7 @@
 				for(let i=0; i<list.length; i++){
 					str += "<li class='left clearfix' data-rno='" + list[i].rno + "'>";
 					str += "<div><div class='header'><strong class='primary-font'>" + list[i].replyer + "</strong>";
-					str += "<small class='float-right text-muted'>" + replyService().displayTime(list[i].replyDate) + "</small></div>";
+					str += "<small class='float-right text-muted'>" + replyService.displayTime(list[i].replyDate) + "</small></div>";
 					str += "<p>" + list[i].reply + "</p></div></li>";
 				}
 				replyUL.html(str);
@@ -140,15 +140,49 @@
 			modal.modal("show");
 		});
 		
+		$(".chat").on("click", "li", function(e){
+			const rno = $(this).data("rno"); 
+			replyService.get(rno, function(reply){
+				modalInputReply.val(reply.reply);
+				modalInputReplyer.val(reply.replyer);
+				modalInputReplyDate.val(replyService.displayTime(reply.replyDate)).attr("readonly", "readonly");
+				modal.data("rno", reply.rno);
+				
+				modal.find("button[id != 'modalCloseBtn']").hide();
+				modalModBtn.show();
+				modalRemoveBtn.show();
+				
+				modal.modal("show");
+			});
+		});
+		
 		modalRegisterBtn.on("click", function(e){
 			const reply = {
 					reply : modalInputReply.val(),
 					replyer : modalInputReplyer.val(),
 					bno : bnoValue
 				};
-			replyService().add(reply, function(result){
+			replyService.add(reply, function(result){
 				alert(result);
 				modal.find("input").val("");
+				modal.modal("hide");
+				showList(1);
+			});
+		});
+		
+		modalModBtn.on("click", function(e){
+			const reply = {rno : modal.data("rno"), reply : modalInputReply.val()};
+			replyService.update(reply, function(result){
+				alert(result);
+				modal.modal("hide");
+				showList(1);
+			});
+		});
+		
+		modalRemoveBtn.on("click", function(e){
+			const rno = modal.data("rno");
+			replyService.remove(rno, function(result){
+				alert(result);
 				modal.modal("hide");
 				showList(1);
 			});

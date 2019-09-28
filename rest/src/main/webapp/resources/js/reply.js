@@ -3,7 +3,7 @@
  */
 console.log("reply Module.........");
 
-const replyService = () => {
+const replyService = (() => {
 	
 	function add(reply, callback, error){
 		console.log("add reply...........");
@@ -45,9 +45,9 @@ const replyService = () => {
 	function remove(rno, callback, error){
 		$.ajax({
 			type : "delete",
-			url : "replies/" + rno,
+			url : "/replies/" + rno,
 			success : function(deleteResult, status, xhr){
-				if(callbakc){
+				if(callback){
 					callback(deleteResult);
 				}
 			},
@@ -121,5 +121,5 @@ const replyService = () => {
 		get : get,
 		displayTime : displayTime
 	};
-} 
+})();
 
