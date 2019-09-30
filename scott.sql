@@ -27,3 +27,10 @@ create sequence seq_reply;
 
 alter table tbl_reply add constraint pk_reply primary key(rno);
 alter table tbl_reply add constraint fk_replyboard foreign key(bno) references tbl_board(bno);
+
+create index idx_reply on tbl_reply (bno desc, rno asc);
+
+select /*+ INDEX(TBL_REPLY IDX_REPLY) */
+rownum rn, bno, rno, reply, replyer, replyDate, updatedate
+from tbl_reply
+where bno = 1 and rno >0
