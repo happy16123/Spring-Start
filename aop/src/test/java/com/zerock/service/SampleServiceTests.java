@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.zerock.config.RootConfig;
+
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @Log4j
-@ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
+@ContextConfiguration(classes = {RootConfig.class})
 public class SampleServiceTests {
 	
 	@Setter(onMethod_ = {@Autowired})

@@ -34,3 +34,7 @@ select /*+ INDEX(TBL_REPLY IDX_REPLY) */
 rownum rn, bno, rno, reply, replyer, replyDate, updatedate
 from tbl_reply
 where bno = 1 and rno >0
+
+alter table tbl_board add (replycnt number default 0);
+
+update tbl_board set replycnt = (select count(rno) from tbl_reply where tbl_reply.bno = tbl_board.bno);
