@@ -60,11 +60,13 @@
 			let str = "";
 			$(arr).each(function(i, obj){
 				if(!obj.image){
-					str += "<li><img src='resources/img/attach.png'> " + obj.fileName + "</li>";
+					let fileCallPath = encodeURIComponent(obj.uploadPath + obj.uuid + "_" + obj.fileName);
+					console.log(fileCallPath);
+					str += "<li><a href='/controller/download?fileName=" + fileCallPath + "'><img src='resources/img/attach.png'>" + obj.fileName + "</a></li>";
 				} else{
-					str += "<li>" + obj.fileName + "</li>";
-					let fileCallPath = encodeURIComponent("/s_" + obj.uuid + "_" + obj.fileName);
-					str += "<li><img src='/controller/display?fileName=" + fileCallPath + "'></li>";
+					let fileCallPath = encodeURIComponent("s_" + obj.uuid + "_" + obj.fileName);
+					console.log(fileCallPath);
+					str += "<li><a href='/controller/download?fileName=" + fileCallPath + "'><img src='/controller/display?fileName=" + fileCallPath + "'>" + obj.fileName + "</a></li>";
 				}
 			});
 			uploadResult.append(str);
