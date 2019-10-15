@@ -64,7 +64,8 @@
 					console.log(fileCallPath);
 					str += "<li><a href='/controller/download?fileName=" + fileCallPath + "'><img src='resources/img/attach.png'>" + obj.fileName + "</a></li>";
 				} else{
-					let fileCallPath = encodeURIComponent("s_" + obj.uuid + "_" + obj.fileName);
+					console.log(obj.uploadPath);
+					let fileCallPath = encodeURIComponent(obj.uploadPath + "s_" + obj.uuid + "_" + obj.fileName);
 					console.log(fileCallPath);
 					str += "<li><a href='/controller/download?fileName=" + fileCallPath + "'><img src='/controller/display?fileName=" + fileCallPath + "'>" + obj.fileName + "</a></li>";
 				}

@@ -111,7 +111,7 @@ public class UploadController {
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String fileName){
 		log.info("fileName : " + fileName);
-		String uploadFolder = "C:\\Users\\gustn\\Desktop\\spring-start\\upload\\" + getFolder() + "\\";
+		String uploadFolder = "C:\\Users\\gustn\\Desktop\\spring-start\\upload\\";
 		File file = new File(uploadFolder + fileName);
 		log.info("file : " + file);
 		ResponseEntity<byte[]> result = null;
