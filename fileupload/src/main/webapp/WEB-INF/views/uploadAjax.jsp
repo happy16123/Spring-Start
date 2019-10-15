@@ -19,7 +19,7 @@
 	padding:10px;
 }
 .uploadResult ul li img{
-	width:20px;
+	width:100px;
 }
 .bigPictureWrapper{
 	position:absolute;
@@ -88,11 +88,13 @@
 				if(!obj.image){
 					let fileCallPath = encodeURIComponent(obj.uploadPath + obj.uuid + "_" + obj.fileName);
 					console.log(fileCallPath);
-					str += "<li><a href='/controller/download?fileName=" + fileCallPath + "'><img src='resources/img/attach.png'>" + obj.fileName + "</a></li>";
+					str += "<li><a href='/controller/download?fileName=" + fileCallPath + "'><img src='resources/img/attach.png'>" + obj.fileName + "</a>" +
+							"<sapn data-file=\'" + fileCallPath + "\'data-type='file'> x </sapn></li>";
 				} else{
 					let fileCallPath = encodeURIComponent(obj.uploadPath + "s_" + obj.uuid + "_" + obj.fileName);
 					let originPath = (obj.uploadPath + obj.uuid + "_" + obj.fileName).replace(new RegExp(/\\/g), "/");
-					str += "<li><a href=\"javascript:showImage(\'" + originPath + "\')\"><img src='/controller/display?fileName=" + fileCallPath + "'>" + obj.fileName + "</a></li>";
+					str += "<li><a href=\"javascript:showImage(\'" + originPath + "\')\"><img src='/controller/display?fileName=" + fileCallPath + "'></a>" +
+							"<span data-file=\'" + fileCallPath + "\' data-type='image'> x </sapn></li>";
 				}
 			});
 			uploadResult.append(str);
@@ -136,6 +138,22 @@
 					console.log(result);
 					showUploadedFile(result);
 					$(".uploadDiv").html(cloneObj.html());
+				}
+			});
+		});
+		
+		$(".uploadResult").on("click", "span", function(e){
+			let targetFile = $(this).data("file");
+			let type = $(this.).data("type");
+			console.log(targetFile);
+			
+			$.ajax({
+				url : "/controller/deleteFile",
+				data : {fileName : targetFile, type : type},
+				dataType : "text",
+				type : "POST",
+				success : function(result){
+					alert(result)
 				}
 			});
 		});

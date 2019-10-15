@@ -145,6 +145,13 @@ public class UploadController {
 		return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
 	}
 	
+	@PostMapping("/deleteFile")
+	@ResponseBody
+	public ResponseEntity<String> deleteFile(String fileName, String type){
+		log.info("deleteFile : " + fileName);
+		return null;
+	}
+	
 	
 	private String getFolder() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
