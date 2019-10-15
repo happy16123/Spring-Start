@@ -21,6 +21,27 @@
 .uploadResult ul li img{
 	width:20px;
 }
+.bigPictureWrapper{
+	position:absolute;
+	display:none;
+	justify-content:center;
+	align-items:center;
+	top:0%;
+	width:100%;
+	height:100%;
+	background-color:gray;
+	z-index:100;
+	background:rgba(255,255,255,0.5);
+}
+.bigPicture{
+	position:relative;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+.bigPicture img{
+	width:600px;
+}
 
 </style>
 
@@ -40,6 +61,11 @@
 	<ul>
 	
 	</ul>
+</div>
+	
+<div class="bigPictureWrapper">
+	<div class="bigPicture">
+	</div>
 </div>
 
 
@@ -64,10 +90,9 @@
 					console.log(fileCallPath);
 					str += "<li><a href='/controller/download?fileName=" + fileCallPath + "'><img src='resources/img/attach.png'>" + obj.fileName + "</a></li>";
 				} else{
-					console.log(obj.uploadPath);
 					let fileCallPath = encodeURIComponent(obj.uploadPath + "s_" + obj.uuid + "_" + obj.fileName);
-					console.log(fileCallPath);
-					str += "<li><a href='/controller/download?fileName=" + fileCallPath + "'><img src='/controller/display?fileName=" + fileCallPath + "'>" + obj.fileName + "</a></li>";
+					let originPath = (obj.uploadPath + obj.uuid + "_" + obj.fileName).replace(new RegExp(/\\/g), "/");
+					str += "<li><a href=\"javascript:showImage(\'" + originPath + "\')\"><img src='/controller/display?fileName=" + fileCallPath + "'>" + obj.fileName + "</a></li>";
 				}
 			});
 			uploadResult.append(str);
@@ -114,8 +139,22 @@
 				}
 			});
 		});
-	
+		
+		$(".bigPictureWrapper").on("click", function(e){
+			$(".bigPicture").animate({width:'0%', height:'0%'}, 1000);
+			setTimeout(() =>{
+				$(this).hide();
+			}, 1000);
+		});
 	});
+</script>
+
+<script>
+	function showImage(fileCallPath){
+		//console.log(fileCallPath);
+		$(".bigPictureWrapper").css("display","flex").show();
+		$(".bigPicture").html("<img src='/controller/display?fileName=" + encodeURI(fileCallPath) + "'>").animate({width:'100%', height:'100%'}, 1000);
+	}
 </script>
 </body>
 </html>
