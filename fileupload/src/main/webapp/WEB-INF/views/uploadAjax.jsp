@@ -144,7 +144,7 @@
 		
 		$(".uploadResult").on("click", "span", function(e){
 			let targetFile = $(this).data("file");
-			let type = $(this.).data("type");
+			let type = $(this).data("type");
 			console.log(targetFile);
 			
 			$.ajax({
