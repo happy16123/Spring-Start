@@ -91,11 +91,11 @@ public class UploadController {
 				multipartFile.transferTo(saveFile);
 				
 				attachDTO.setUuid(uuid.toString());
-				attachDTO.setUploadPath(getFolder()+"\\");
+				attachDTO.setUploadPath(getFolder());
 				
 				if(checkImageType(saveFile)) {
 					attachDTO.setImage(true);
-					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
+					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "\\s_" + uploadFileName));
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
 					thumbnail.close();
 				}

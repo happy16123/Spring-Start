@@ -1,6 +1,7 @@
 package com.zerock.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,12 +16,12 @@ import com.zerock.domain.PageDTO;
 import com.zerock.service.BoardService;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j;
 
 @Controller
 @RequestMapping("/board/*")
 @AllArgsConstructor
-@Log
+@Log4j
 public class BoardController {
 	
 	private BoardService service;
@@ -46,6 +47,10 @@ public class BoardController {
 	@PostMapping("/register")
 	public String register(BoardVO board, RedirectAttributes rttr) {
 		log.info("/register : " + board);
+		
+		if(board.getAttachList() != null) {
+			board.getAttachList().forEach(attach -> log.info(attach.toString()));
+		}
 		
 		service.register(board);
 		
