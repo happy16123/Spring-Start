@@ -3,6 +3,52 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+<style>
+.uploadResult{
+	width:100%;
+	background-color:gray;
+}
+.uploadResult ul{
+	display:flex;
+	flex-flow:row;
+	justify-content:center;
+	align-items:center;
+}
+.uploadResult ul li{
+	list-sytle:none;
+	padding:10px;
+	align-content:center;
+	text-align:center;
+}
+.uploadResult ul li img{
+	width:100px;
+}
+.uploadResult ul li span{
+	color:white;
+}
+.bigPictureWrapper{
+	postion:absolute;
+	display:none;
+	justify-content:center;
+	align-items:center;
+	top:0%;
+	width:100%;
+	height:100%;
+	background-color:gray;
+	z-index:100;
+	background:rgba(255,255,255,0.5);
+}
+.bigPicture{
+	position:relative;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+.bigPicture img{
+	width:600px;
+}
+</style>
+
 <%@include file="../includes/header.jsp"%>
 
 <div class="container-fluid">
@@ -41,6 +87,25 @@
 						<input type="hidden" name="type" value="<c:out value='${cri.type}'/>">
 					</form>
 				</div>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-header">Files</div>
+				<div class="card-body">
+					<div class="uploadResult">
+						<ul>
+						
+						</ul>
+					</div>
+				</div>
+				<div class="bigPictureWrapper">
+					<div class="bigPicture"></div>
+				</div>				
 			</div>
 		</div>
 	</div>
@@ -272,5 +337,58 @@
 		});
 	});
 	
+</script>
+
+<script>
+	$(document).ready(function(){
+		(function(){
+			let bno = "<c:out value='${board.bno}'/>";
+		
+			$.getJSON("/board/getAttachList", { bno : bno }, function(arr){
+				console.log(arr);
+				let str = "";
+				
+				$(arr).each(function(i, attach){
+					if(attach.fileType){
+						let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid + "_" + attach.fileName);
+						str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "'data-type='" + attach.fileType + "'><div>";
+						str += "<img src='/display?fileName=" + fileCallPath + "'></div></li>";
+					} else{
+						str += "<li data-path='" + attach.uploadPath + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.fileName + "'data-type='" + attach.fileType + "'><div>";
+						str += "<span>" + attach.fileName + "</span><br/>";
+						str += "<img src='/resources/img/attach.png'></div></li>";
+					}
+				});
+				
+				$(".uploadResult ul").html(str);
+			});
+		})();
+		
+		$(".uploadResult").on("click", "li", function(e){
+			console.log("view Image");
+			let liObj = $(this);
+			let path = encodeURIComponent(liObj.data("path") + "/" + liObj.data("uuid") + "_" + liObj.data("filename"));
+			
+			if(liObj.data("type")){
+				showImage(path.replace(new RegExp(/\\/g), "/"));
+			} else{
+				self.location = "/download?fileName=" + path;
+			}
+		});
+		
+		$(".bigPictureWrapper").on("click", function(e){
+			$(".bigPicture").animate({width:'0%', height:'0%'}, 1000);
+			setTimeout(function(){
+				$("bigPictureWrapper").hide();
+			}, 1000);
+		});
+		
+		function showImage(fileCallPath){
+			alert(fileCallPath);
+			$(".bigPictureWrapper").css("display", "flex").show();
+			$(".bigPicture").html("<img src='/display?fileName=" + fileCallPath + "'>").animate({width:'100%', height:'100%'}, 1000);
+		}
+		
+	});
 </script>
 
