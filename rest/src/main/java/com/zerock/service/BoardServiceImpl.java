@@ -58,6 +58,7 @@ public class BoardServiceImpl implements BoardService {
 	public boolean remove(Long bno) {
 		// TODO Auto-generated method stub
 		log.info("remove....." + bno);
+		attachMapper.deleteAll(bno);
 		return mapper.delete(bno) == 1;
 	}
 	
