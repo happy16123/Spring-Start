@@ -8,13 +8,18 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @ComponentScan(basePackages = "com.zerock.service")
+@ComponentScan(basePackages = "com.zerock.task")
 @MapperScan(basePackages = {"com.zerock.mapper"})
+@EnableTransactionManagement
+@EnableScheduling
 public class RootConfig {
 
 	@Bean
