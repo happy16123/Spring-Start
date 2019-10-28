@@ -27,10 +27,5 @@ public class SampleController {
 	public void doAdmin() {
 		log.info("admin only");
 	}
-	
-	@GetMapping("/accessError")
-	public void accessDenied(Authentication auth, Model model) {
-		log.info("access Denied : " + auth);
-		model.addAttribute("msg", "Access Denied");
-	}
+
 }
