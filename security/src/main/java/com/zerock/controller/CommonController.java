@@ -36,7 +36,7 @@ public class CommonController {
 		log.info("custom logout");
 	}
 	
-	@PostMapping("customLogout")
+	@PostMapping("/customLogout")
 	public void logoutPOST() {
 		log.info("post custom logout");
 	}
