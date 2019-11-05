@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <style>
 .uploadResult{
@@ -76,7 +77,12 @@
 					<div class="form-group">
 						<label>Writer</label> <input class="form-control" name="writer" value='<c:out value="${board.writer}"/>' readonly="readonly">
 					</div>
-					<button data-oper="modify" class="btn btn-primary">Modify</button>
+					<sec:authentication property="principal" var="pinfo"/>
+					<sec:authorize access="isAuthenticated()">
+						<c:if test="${pinfo.username eq board.writer}">
+							<button data-oper="modify" class="btn btn-primary">Modify</button>
+						</c:if>
+					</sec:authorize>
 					<button data-oper="list" class="btn btn-info">List</button>
 					
 					<form id="operForm" action="/board/modify" method="get">
@@ -115,7 +121,9 @@
 			<div class="card">
 				<div class="card-header">
 					<i class="fa fa-comments fa-fw"></i> Reply
-					<button id="addReplyBtn" class="btn btn-primary btn-xs float-right">New Reply</button>
+					<sec:authorize access="isAuthenticated()">
+						<button id="addReplyBtn" class="btn btn-primary btn-xs float-right">New Reply</button>
+					</sec:authorize>
 				</div>
 
 				<div class="card-body">

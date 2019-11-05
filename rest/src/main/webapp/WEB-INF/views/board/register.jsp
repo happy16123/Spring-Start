@@ -121,6 +121,8 @@
 			uploadUL.append(str);
 		}
 		
+		const csrfHeaderName = "${_csrf.headerName}";
+		const csrfTokenValue = "${_csrf.token}";
 		$("input[type='file']").change(function(e){
 			const formData = new FormData();
 			const inputFile = $("input[name='uploadFile']");
@@ -138,6 +140,9 @@
 				url : "/uploadAjaxAction",
 				processData : false,
 				contentType : false,
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+				},
 				data : formData,
 				type : "POST",
 				dataType : "json",
@@ -158,6 +163,9 @@
 			$.ajax({
 				url : "/deleteFile",
 				data : {fileName : targetFile, type : type},
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+				},
 				dataType : "text",
 				type : "POST",
 				success : function(result){
